@@ -5,10 +5,10 @@
 <h1 class="title">Edit project</h1>
 
 
-<form method="POST" action="/projects/{{$project->id}}">
+<form method="POST" action="/projects/{{$project->id}}" style="margin-bottom:20px;">
 
-{{method_field('PATCH')}}
-{{ csrf_field() }}
+@method('PATCH')
+@csrf
 <div class="field">
 <label class="title" for="title">Title</label>
 <div class="control">
@@ -30,5 +30,15 @@
 </div>
 </div>
 
+</form>
+
+<form action="/projects/{{$project->id}}" method="post">
+@method('DELETE')
+@csrf
+<div class="field">
+<div class="control">
+<button type="submit" class="button">Delete project</button>
+</div>
+</div>
 </form>
 @endsection
