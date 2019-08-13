@@ -16,7 +16,7 @@ class ProjectsController extends Controller
 
         return view('projects.index', compact('projects'));
     }
-
+// this loads the create view
     public function create()
     {
         return view('projects.create');
@@ -30,7 +30,37 @@ class ProjectsController extends Controller
         $project->description = request('description');
 
         $project->save();
+// this redirects to the /projects endpoint.
 
         return redirect('/projects');
+    }
+
+    public function edit($id)
+    {
+        $project = Project::find($id);
+    
+        return view('projects.edit', compact('project'));
+    }
+
+    public function update($id)
+    {
+        $project = Project::find($id);
+
+        $project->title = request('title');
+        $project->description = request('description');
+
+        $project->save();
+
+        return redirect('/projects');
+    }
+
+    public function show()
+    {
+
+    }
+
+    public function destroy()
+    {
+
     }
 }

@@ -3,6 +3,7 @@
 <body>
 <h1> Create a project </h1>
 <form action="/projects" method="POST">
+<!-- csrf protection. this is inbuilt in laravel -->
 {{ csrf_field() }}
 <div>
 <input type="text" name="title" placeholder="Project title">
