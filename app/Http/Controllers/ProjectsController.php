@@ -7,16 +7,16 @@ use App\Project;
 
 class ProjectsController extends Controller
 {
-    //
     
-    
-    public function index(){
+    public function index()
+    {
 
         $projects = Project::all();
 
         return view('projects.index', compact('projects'));
     }
-// this loads the create view
+
+    // this loads the create view
     public function create()
     {
         return view('projects.create');
@@ -24,44 +24,40 @@ class ProjectsController extends Controller
 
     public function store()
     {
-        $project = new Project();
 
-        $project->title = request('title');
-        $project->description = request('description');
+        Project::create([
 
-        $project->save();
-// this redirects to the /projects endpoint.
+            'title' => request('title'),
+            'description' => request('description')
 
+        ]);
+
+
+    // this redirects to the /projects endpoint.
         return redirect('/projects');
     }
 
-    public function edit($id)
+    public function edit(Project $project)
     {
-        $project = Project::find($id);
-    
+           
         return view('projects.edit', compact('project'));
     }
 
-    public function update($id)
+    public function update(Project $project)
     {
-        $project = Project::find($id);
-
-        $project->title = request('title');
-        $project->description = request('description');
-
-        $project->save();
+        $project->update(request(['title', 'description']));
 
         return redirect('/projects');
     }
 
-    public function show()
+    public function show(Project $project)
     {
-
+        return view('projects.show', compact('project'));
     }
 
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        $project = Project::find($id)->delete();
+        $project->delete();
 
         return redirect('/projects');
 
