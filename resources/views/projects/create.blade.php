@@ -6,13 +6,27 @@
 <!-- csrf protection. this is inbuilt in laravel -->
 {{ csrf_field() }}
 <div>
-<input type="text" name="title" placeholder="Project title">
+<!-- adding required ensures client side validation. this marks
+the field as required -->
+
+<!-- the value old title retains the input even tho it doesnt meet the 
+basic requirements -->
+<input type="text" name="title" placeholder="Project title" required value="{{ old('title') }}">
 </div>
 <div>
-<textarea name="description" placeholder="Project description"></textarea>
+<textarea name="description" placeholder="Project description" required >{{ old('description') }}</textarea>
 </div>
 <div>
 <button type="submit">Create a project</button>
+</div>
+<div class="notification">
+<ul>
+@foreach ($errors->all() as $error)
+<li>
+{{ $error }}
+</li>
+@endforeach
+</ul>
 </div>
 </form>
 

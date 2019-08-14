@@ -24,13 +24,13 @@ class ProjectsController extends Controller
 
     public function store()
     {
-
-        Project::create([
-
-            'title' => request('title'),
-            'description' => request('description')
-
+        // this is backside validation
+        $attributes = request()->validate([
+            'title' => ['required','min:3', 'max:255'],
+            'description' => ['required','min:5']
         ]);
+
+        Project::create( $attributes );
 
 
     // this redirects to the /projects endpoint.
