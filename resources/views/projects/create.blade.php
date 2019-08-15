@@ -19,15 +19,7 @@ basic requirements -->
 <div>
 <button type="submit">Create a project</button>
 </div>
-<div class="notification">
-<ul>
-@foreach ($errors->all() as $error)
-<li>
-{{ $error }}
-</li>
-@endforeach
-</ul>
-</div>
+@include('errors')
 </form>
 
 </body>
