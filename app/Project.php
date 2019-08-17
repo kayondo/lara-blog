@@ -10,7 +10,7 @@ class Project extends Model
     // the user editing other fields and inserting malicious data e.g editing the id
     
     protected $fillable = [
-        'title', 'description'
+        'title', 'description','owner_id'
     ];
 
     public function tasks()

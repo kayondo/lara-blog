@@ -8,10 +8,15 @@ use App\Project;
 class ProjectsController extends Controller
 {
     
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
 
-        $projects = Project::all();
+        $projects = Project::where('owner_id', auth()->id())->get();
 
         return view('projects.index', compact('projects'));
     }
@@ -24,13 +29,17 @@ class ProjectsController extends Controller
 
     public function store()
     {
+        // dd(auth()->id());
         // this is backside validation
         $attributes = request()->validate([
             'title' => ['required','min:3', 'max:255'],
             'description' => ['required','min:5']
         ]);
 
-        Project::create( $attributes );
+        $attributes['owner_id']  = auth()->id();
+        // $attributes['owner_id'] = auth()->id();
+        // dd($attributes);
+        Project::create($attributes);
 
 
     // this redirects to the /projects endpoint.

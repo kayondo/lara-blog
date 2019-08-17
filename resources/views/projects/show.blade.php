@@ -9,7 +9,7 @@
 @if ($project->tasks->count())
 <div>
 @foreach ($project->tasks as $task)
-<div>
+<div class="task-complete">
     <form action="/tasks/{{$task->id}}" method="POST">
     @method('PATCH')
     @csrf
@@ -18,7 +18,7 @@
     {{ $task->description }}
     </label>
     </form>
-    </div>
+</div>
 @endforeach
 
 </div>
